@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <iostream>
+#include <Windows.h>
+
+extern "C" __declspec(dllexport) void whatever()
+{
+	std::cout << "Running in whatever func " << std::endl;
+}
+
+BOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved)
+{
+
+	if (reason == DLL_PROCESS_ATTACH)
+	{
+		MessageBox(0, L"Hello from dll", L"dll", NULL);
+	}
+	else if (reason == DLL_PROCESS_DETACH)
+	{
+		MessageBox(0, L"Detached dll", L"dll", NULL);
+	}
+
+	return TRUE;
+}
